@@ -4,7 +4,7 @@ resource "aws_eip" "bastion" {
 }
 
 resource "aws_autoscaling_group" "bastion" {
-  name                 = "${local.resource_name}"
+  name                 = "${local.resource_name}-${local.asg_name_id_suffix}"
   vpc_zone_identifier  = ["${var.public_subnet_ids}"]
   max_size             = 1
   min_size             = 1
@@ -15,18 +15,7 @@ resource "aws_autoscaling_group" "bastion" {
     "${map("key", "Name", "value", "${local.resource_name}", "propagate_at_launch", true)}",
     "${local.asg_tags}",
   ]
-}
 
-data "template_file" "bastion_setup_init" {
-  template = "${file("${path.module}/user_data/setup_init.sh")}"
-}
-
-data "template_file" "bastion_associate_eip" {
-  template = "${file("${path.module}/user_data/associate_eip.sh")}"
-
-  vars {
-    EIP_ALLOCATION_ID = "${aws_eip.bastion.id}"
-  }
 }
 
 resource "aws_launch_configuration" "bastion" {
@@ -47,7 +36,7 @@ resource "aws_launch_configuration" "bastion" {
     volume_size = "${var.instance_volume_size}"
   }
 
-  user_data = "${data.template_file.bastion_setup_init.rendered}${data.template_file.bastion_associate_eip.rendered}${var.extra_user_data}"
+  user_data = "${local.lc_user_data}"
 
   lifecycle {
     create_before_destroy = true

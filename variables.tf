@@ -116,3 +116,9 @@ variable "route53_record_prefix" {
   default     = ""
   description = "Will be prefixed to the route53 record. Only used if route53_zone_id is passed also"
 }
+
+variable "users" {
+  description = "A list of maps of extra users containing usernames, keys and groups. See README for example"
+  type        = "list"
+  default     = []
+}
