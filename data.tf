@@ -31,6 +31,7 @@ data "template_file" "bastion_associate_eip" {
 
 data "template_file" "users" {
   template = "${file("${path.module}/user_data/add_users.sh")}"
+
   vars {
     data = "${join("", data.template_file.user_config_commands.*.rendered)}"
   }
@@ -39,6 +40,7 @@ data "template_file" "users" {
 data "template_file" "user_config_commands" {
   count    = "${length(var.users)}"
   template = "${file("${path.module}/user_data/user_config_commands.sh")}"
+
   vars {
     group    = "${lookup(var.users[count.index], "group")}"
     username = "${lookup(var.users[count.index], "username")}"

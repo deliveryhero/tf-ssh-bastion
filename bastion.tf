@@ -15,7 +15,6 @@ resource "aws_autoscaling_group" "bastion" {
     "${map("key", "Name", "value", "${local.resource_name}", "propagate_at_launch", true)}",
     "${local.asg_tags}",
   ]
-
 }
 
 resource "aws_launch_configuration" "bastion" {
