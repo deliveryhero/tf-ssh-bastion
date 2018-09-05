@@ -23,6 +23,7 @@ variable "vpc_id" {
 variable "instance_key_name" {
   type        = "string"
   description = "Name of the SSH key in EC2 to use for instance"
+  default     = ""
 }
 
 variable "instance_ami_id" {
