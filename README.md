@@ -2,31 +2,6 @@
 
 Creates an autoscaling group, security groups, IAM policy, elastic IP and user-data to automatically assign the elastic IP. This ensures an SSH bastion is always present with the same public IP address.
 
-### Example
-
-```hcl
-module "bastion1" {
-  source                  = "git@github.com:deliveryhero/tf-ssh-bastion.git?ref=0.2"
-  name                    = "staging"
-  vpc_id                  = "vpc123456"
-  instance_key_name       = "my-ec2-key"
-  route53_zone_id         = "EXAMPLE12345"
-  public_subnet_ids       = ["${module.vpc1.public_subnets}"]
-
-  allowed_ssh_cidr_blocks = [
-    "203.1.2.3/32",
-    "203.4.5.6/32",
-  ]
-
-  tags = {
-    terraform   = "true"
-    environment = "staging"
-  }
-}
-```
-
-### Example with users
-
 ```hcl
 module "bastion1" {
   source                  = "git@github.com:deliveryhero/tf-ssh-bastion.git?ref=0.2"
@@ -54,6 +29,8 @@ module "bastion1" {
 }
 ```
 
+See [example](example) for a complete example with VPC.
+
 ## Documentation generation
 
 Documentation should be modified within `main.tf` and generated using [terraform-docs](https://github.com/segmentio/terraform-docs):
@@ -77,7 +54,7 @@ MIT Licensed. See [LICENSE](https://github.com/deliveryhero/tf-ssh-bastion/tree/
 | instance_ami_id | AMI ID for bastion instance. If not specified, see instance_ami_default | string | `` | no |
 | instance_ami_name_filter | The name filter to use for getting an AMI ID for the region | string | `ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*` | no |
 | instance_ami_owner_id_filter | The owner ID filter to use for getting an AMI ID for the region | string | `099720109477` | no |
-| instance_key_name | Name of the SSH key in EC2 to use for instance | string | - | yes |
+| instance_key_name | Name of the SSH key in EC2 to use for instance | string | `` | no |
 | instance_type | EC2 instance type | string | `t2.micro` | no |
 | instance_volume_size | Instance EBS volume size | string | `32` | no |
 | name | A unique name to identify this bastion and related resources | string | - | yes |
@@ -101,4 +78,6 @@ MIT Licensed. See [LICENSE](https://github.com/deliveryhero/tf-ssh-bastion/tree/
 | bastion_aws_iam_role_arn | ARN of the bastion instance role |
 | bastion_aws_iam_role_id | Name of the bastion inance role |
 | bastion_sg_id | The security group of the bastion instance |
+| bastion_user_data_full | The complete user-data from the bastion instance |
+| bastion_user_data_users | The useradd and SSH key setup part of the user-data from the bastion instance |
 | eip | The elastic IP that is assigned to the bastion instance |

@@ -27,3 +27,13 @@ output "autoscaling_group_name" {
   value       = "${aws_autoscaling_group.bastion.name}"
   description = "Name of the autoscaling group"
 }
+
+output "bastion_user_data_full" {
+  value       = "${local.lc_user_data}"
+  description = "The complete user-data from the bastion instance"
+}
+
+output "bastion_user_data_users" {
+  value       = "${data.template_file.users.rendered}"
+  description = "The useradd and SSH key setup part of the user-data from the bastion instance"
+}
