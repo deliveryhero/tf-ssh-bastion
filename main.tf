@@ -1,7 +1,7 @@
 /**
 # SSH bastion
 
-Creates an autoscaling group, security groups, IAM policy, elastic IP and user-data to automatically assign the elastic IP. This ensures an SSH bastion is always present with the same public IP address.
+This module creates a flexible and highly available SSH bastion with a fixed public IP address. This includes adding users, group, SSH keys and sudo config to give you a simple but complete SSH gateway into your AWS infrastructure without the need for a configuration management system. This module creates an autoscaling group, security groups, IAM policy, elastic IP and user-data to automatically assign the elastic IP and setup users and keys.
 
 * ```hcl
 * module "bastion1" {

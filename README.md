@@ -1,6 +1,6 @@
 # SSH bastion
 
-Creates an autoscaling group, security groups, IAM policy, elastic IP and user-data to automatically assign the elastic IP. This ensures an SSH bastion is always present with the same public IP address.
+This module creates a flexible and highly available SSH bastion with a fixed public IP address. This includes adding users, group, SSH keys and sudo config to give you a simple but complete SSH gateway into your AWS infrastructure without the need for a configuration management system. This module creates an autoscaling group, security groups, IAM policy, elastic IP and user-data to automatically assign the elastic IP and setup users and keys.
 
 ```hcl
 module "bastion1" {
@@ -75,9 +75,9 @@ MIT Licensed. See [LICENSE](https://github.com/deliveryhero/tf-ssh-bastion/tree/
 |------|-------------|
 | allow_ssh_from_bastion_sg_id | Put instances into this security group to allow SSH from the bastion |
 | autoscaling_group_name | Name of the autoscaling group |
-| bastion_aws_iam_role_arn | ARN of the bastion instance role |
-| bastion_aws_iam_role_id | Name of the bastion inance role |
-| bastion_sg_id | The security group of the bastion instance |
-| bastion_user_data_full | The complete user-data from the bastion instance |
-| bastion_user_data_users | The useradd and SSH key setup part of the user-data from the bastion instance |
+| aws_iam_role_id | Name of the bastion inance role |
 | eip | The elastic IP that is assigned to the bastion instance |
+| role_arn | ARN of the bastion instance role |
+| sg_id | The security group of the bastion instance |
+| user_data_full | The complete user-data from the bastion instance |
+| user_data_users | The useradd and SSH key setup part of the user-data from the bastion instance |
