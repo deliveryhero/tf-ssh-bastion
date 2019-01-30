@@ -3,12 +3,6 @@ variable "name" {
   description = "A unique name to identify this bastion and related resources"
 }
 
-variable "resource_name_prefix" {
-  type        = "string"
-  default     = ""
-  description = "A prefix to prepend to names of resources"
-}
-
 variable "resource_name_suffix" {
   type        = "string"
   default     = "-bastion"
@@ -106,16 +100,10 @@ variable "route53_record_ttl" {
   description = "TTL of route53 record. Only used if route53_zone_id is passed also"
 }
 
-variable "route53_record_suffix" {
+variable "route53_record_name" {
   type        = "string"
   default     = ""
-  description = "Will be appended to the route53 record. Only used if route53_zone_id is passed also"
-}
-
-variable "route53_record_prefix" {
-  type        = "string"
-  default     = ""
-  description = "Will be prefixed to the route53 record. Only used if route53_zone_id is passed also"
+  description = "Name of the route53 record. Only used if route53_zone_id is passed. If not set then `name` variable is used"
 }
 
 variable "users" {
