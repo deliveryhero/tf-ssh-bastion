@@ -33,9 +33,9 @@ variable "instance_ami_name_filter" {
 }
 
 variable "instance_ami_owner_id_filter" {
-  type        = "string"
-  description = "The owner ID filter to use for getting an AMI ID for the region"
-  default     = "099720109477"
+  type        = "list"
+  description = "The owner IDs to use for getting an AMI ID for the region"
+  default     = ["099720109477"]
 }
 
 variable "allowed_ssh_cidr_blocks" {
