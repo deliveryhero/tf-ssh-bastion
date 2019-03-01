@@ -53,7 +53,7 @@ MIT Licensed. See [LICENSE](https://github.com/deliveryhero/tf-ssh-bastion/tree/
 | extra\_user\_data | Any extra user-data. Will be appended to existing | string | `` | no |
 | instance\_ami\_id | AMI ID for bastion instance. If not specified, see instance_ami_default | string | `` | no |
 | instance\_ami\_name\_filter | The name filter to use for getting an AMI ID for the region | string | `ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*` | no |
-| instance\_ami\_owner\_id\_filter | The owner ID filter to use for getting an AMI ID for the region | string | `099720109477` | no |
+| instance\_ami\_owner\_id\_filter | The ID filter accepts `self` or owner's ID or alias of an AMI | list | `[099720109477]` | no |
 | instance\_key\_name | Name of the SSH key in EC2 to use for instance | string | `` | no |
 | instance\_type | EC2 instance type | string | `t2.micro` | no |
 | instance\_volume\_size | Instance EBS volume size | string | `32` | no |
