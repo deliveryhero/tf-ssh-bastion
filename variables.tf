@@ -34,7 +34,7 @@ variable "instance_ami_name_filter" {
 
 variable "instance_ami_owner_id_filter" {
   type        = "list"
-  description = "The owner IDs to use for getting an AMI ID for the region"
+  description = "The owner IDs to use for getting an AMI ID for the region. The default is the Ubuntu account ID."
   default     = ["099720109477"]
 }
 
