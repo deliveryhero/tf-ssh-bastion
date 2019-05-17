@@ -50,22 +50,23 @@ MIT Licensed. See [LICENSE](https://github.com/deliveryhero/tf-ssh-bastion/tree/
 | allowed\_ssh\_cidr\_blocks | CIDR blocks to allow SSH from. Should be set to your trusted IP or IP ranges | list | `[ "0.0.0.0/0" ]` | no |
 | extra\_iam\_policy\_arns | List of extra IAM policy ARNs to attach to the bastion role | list | `[]` | no |
 | extra\_sg\_ids | List of extra security group IDs for the bastion instance | list | `[]` | no |
-| extra\_user\_data | Any extra user-data. Will be appended to existing | string | `` | no |
-| instance\_ami\_id | AMI ID for bastion instance. If not specified, see instance_ami_default | string | `` | no |
-| instance\_ami\_name\_filter | The name filter to use for getting an AMI ID for the region | string | `ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*` | no |
-| instance\_ami\_owner\_id\_filter | The ID filter accepts `self` or owner's ID or alias of an AMI | list | `[099720109477]` | no |
-| instance\_key\_name | Name of the SSH key in EC2 to use for instance | string | `` | no |
-| instance\_type | EC2 instance type | string | `t2.micro` | no |
-| instance\_volume\_size | Instance EBS volume size | string | `32` | no |
-| name | A unique name to identify this bastion and related resources | string | - | yes |
-| public\_subnet\_ids | List of public subnets | list | - | yes |
-| resource\_name\_suffix | A suffix to append to names of resources | string | `-bastion` | no |
-| route53\_record\_name | Name of the route53 record. Only used if route53_zone_id is passed. If not set then `name` variable is used | string | `` | no |
-| route53\_record\_ttl | TTL of route53 record. Only used if route53_zone_id is passed also | string | `60` | no |
-| route53\_zone\_id | If specified a route53 record will be created | string | `` | no |
+| extra\_user\_data | Any extra user-data. Will be appended to existing | string | `""` | no |
+| instance\_ami\_id | AMI ID for bastion instance. If not specified, see instance_ami_default | string | `""` | no |
+| instance\_ami\_name\_filter | The name filter to use for getting an AMI ID for the region | string | `"ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"` | no |
+| instance\_ami\_owner\_id\_filter | The owner IDs to use for getting an AMI ID for the region. The default is the Ubuntu account ID. | list | `[ "099720109477" ]` | no |
+| instance\_hostname | Hostname for bastion instance. If not specified, local.resource_name will be used | string | `""` | no |
+| instance\_key\_name | Name of the SSH key in EC2 to use for instance | string | `""` | no |
+| instance\_type | EC2 instance type | string | `"t2.micro"` | no |
+| instance\_volume\_size | Instance EBS volume size | string | `"32"` | no |
+| name | A unique name to identify this bastion and related resources | string | n/a | yes |
+| public\_subnet\_ids | List of public subnets | list | n/a | yes |
+| resource\_name\_suffix | A suffix to append to names of resources | string | `"-bastion"` | no |
+| route53\_record\_name | Name of the route53 record. Only used if route53_zone_id is passed. If not set then `name` variable is used | string | `""` | no |
+| route53\_record\_ttl | TTL of route53 record. Only used if route53_zone_id is passed also | string | `"60"` | no |
+| route53\_zone\_id | If specified a route53 record will be created | string | `""` | no |
 | tags | A map of tags to add to all resources. | map | `{}` | no |
 | users | A list of maps of extra users containing usernames, keys and groups. See README for example | list | `[]` | no |
-| vpc\_id | The ID of the VPC where this bastion will exist | string | - | yes |
+| vpc\_id | The ID of the VPC where this bastion will exist | string | n/a | yes |
 
 ## Outputs
 
