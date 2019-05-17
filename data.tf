@@ -15,6 +15,10 @@ data "aws_ami" "default" {
 
 data "template_file" "bastion_setup_init" {
   template = "${file("${path.module}/user_data/setup_init.sh")}"
+
+  vars {
+    INSTANCE_HOSTNAME = "${local.instance_hostname}"
+  }
 }
 
 data "template_file" "bastion_associate_eip" {
