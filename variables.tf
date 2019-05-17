@@ -26,6 +26,12 @@ variable "instance_ami_id" {
   description = "AMI ID for bastion instance. If not specified, see instance_ami_default"
 }
 
+variable "instance_hostname" {
+  type        = "string"
+  default     = ""
+  description = "Hostname for bastion instance. If not specified, local.resource_name will be used"
+}
+
 variable "instance_ami_name_filter" {
   type        = "string"
   description = "The name filter to use for getting an AMI ID for the region"
