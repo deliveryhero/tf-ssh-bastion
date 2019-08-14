@@ -45,5 +45,9 @@ terraform-docs md ./ | cat -s | tail -r | tail -n +2 | tail -r > README.md
 MIT Licensed. See [LICENSE](https://github.com/deliveryhero/tf-ssh-bastion/tree/master/LICENSE) for full details.
 */
 
-provider "null" {}
-provider "template" {}
+provider "null" {
+}
+
+provider "template" {
+}
+
