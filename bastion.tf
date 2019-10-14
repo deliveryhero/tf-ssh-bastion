@@ -16,14 +16,17 @@ resource "aws_autoscaling_group" "bastion" {
   desired_capacity     = 1
   launch_configuration = aws_launch_configuration.bastion.name
 
-  tags = [
-    {
-      "key"                 = "Name"
-      "value"               = local.resource_name
-      "propagate_at_launch" = true
-    },
-    local.asg_tags,
-  ]
+  #tags = merge(local.asg_tags[0], map("key", "name", "value", local.resource_name, "propagate_at_launch", true))
+  tags = concat(
+    [
+      {
+        "key"                 = "Name"
+        "value"               = local.resource_name
+        "propagate_at_launch" = true
+      }
+    ],
+    local.asg_tags
+  )
 }
 
 resource "aws_launch_configuration" "bastion" {
@@ -31,10 +34,8 @@ resource "aws_launch_configuration" "bastion" {
   image_id      = local.instance_ami_id
   instance_type = var.instance_type
 
-  security_groups = [
-    aws_security_group.bastion.id,
-    var.extra_sg_ids,
-  ]
+  security_groups = concat([aws_security_group.bastion.id], var.extra_sg_ids)
+
 
   key_name             = var.instance_key_name
   iam_instance_profile = aws_iam_instance_profile.bastion.arn

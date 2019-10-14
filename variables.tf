@@ -114,7 +114,7 @@ variable "route53_record_name" {
 
 variable "users" {
   description = "A list of maps of extra users containing usernames, keys and groups. See README for example"
-  type        = list(string)
+  type        = list(map(string))
   default     = []
 }
 
