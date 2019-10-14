@@ -3,13 +3,13 @@ resource "aws_security_group_rule" "allow_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "TCP"
-  cidr_blocks       = "${var.allowed_ssh_cidr_blocks}"
-  security_group_id = "${aws_security_group.bastion.id}"
+  cidr_blocks       = var.allowed_ssh_cidr_blocks
+  security_group_id = aws_security_group.bastion.id
 }
 
 resource "aws_security_group" "bastion" {
-  name_prefix = "${local.resource_name}"
-  vpc_id      = "${var.vpc_id}"
+  name_prefix = local.resource_name
+  vpc_id      = var.vpc_id
   description = "Bastion ${var.name}"
 
   egress {
@@ -19,20 +19,31 @@ resource "aws_security_group" "bastion" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = "${merge(var.tags, map("Name", "${local.resource_name}"))}"
+  tags = merge(
+    var.tags,
+    {
+      "Name" = local.resource_name
+    },
+  )
 }
 
 resource "aws_security_group" "allow_ssh_from_bastion" {
   name        = "allow-ssh-from-${local.resource_name}"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = var.vpc_id
   description = "Allows SSH from ${var.name}"
 
   ingress {
     from_port       = 22
     to_port         = 22
     protocol        = "tcp"
-    security_groups = ["${aws_security_group.bastion.id}"]
+    security_groups = [aws_security_group.bastion.id]
   }
 
-  tags = "${merge(var.tags, map("Name", "allow-ssh-from-${local.resource_name}"))}"
+  tags = merge(
+    var.tags,
+    {
+      "Name" = "allow-ssh-from-${local.resource_name}"
+    },
+  )
 }
+
