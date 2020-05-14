@@ -4,7 +4,7 @@ This module creates a flexible and highly available SSH bastion with a fixed pub
 
 ```hcl
 module "bastion1" {
-  source                  = "git@github.com:deliveryhero/tf-ssh-bastion.git?ref=0.2"
+  source                  = "git@github.com:deliveryhero/tf-ssh-bastion.git?ref=0.9"
   name                    = "staging"
   vpc_id                  = "vpc123456"
   instance_key_name       = "my-ec2-key"
