@@ -119,7 +119,7 @@ variable "users" {
 }
 
 variable "create_route53" {
-  type        = boolean
+  type        = bool
   default     = true
   description = "If specified to false will not create route53 record for the bastion"
 }
