@@ -1,5 +1,5 @@
 resource "aws_route53_record" "bastion" {
-  count   = var.route53_zone_id == "" ? 0 : 1
+  count   = var.create_route53 == true ? 1 : 0
   zone_id = var.route53_zone_id
   name    = var.route53_record_name == "" ? var.name : var.route53_record_name
   type    = "A"

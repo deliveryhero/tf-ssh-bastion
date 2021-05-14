@@ -61,9 +61,10 @@ MIT Licensed. See [LICENSE](https://github.com/deliveryhero/tf-ssh-bastion/tree/
 | name | A unique name to identify this bastion and related resources | string | n/a | yes |
 | public\_subnet\_ids | List of public subnets | list | n/a | yes |
 | resource\_name\_suffix | A suffix to append to names of resources | string | `"-bastion"` | no |
-| route53\_record\_name | Name of the route53 record. Only used if route53_zone_id is passed. If not set then `name` variable is used | string | `""` | no |
-| route53\_record\_ttl | TTL of route53 record. Only used if route53_zone_id is passed also | string | `"60"` | no |
-| route53\_zone\_id | If specified a route53 record will be created | string | `""` | no |
+| create\_route53 | If route53 record needs to be created for the host | bool | `true` | no |
+| route53\_record\_name | Name of the route53 record.  If not set then `name` variable is used | string | `""` | no |
+| route53\_record\_ttl | TTL of route53 record. | string | `"60"` | no |
+| route53\_zone\_id | ZoneID of the route53 record | string | `""` | no |
 | tags | A map of tags to add to all resources. | map | `{}` | no |
 | users | A list of maps of extra users containing usernames, keys and groups. See README for example | list | `[]` | no |
 | vpc\_id | The ID of the VPC where this bastion will exist | string | n/a | yes |
